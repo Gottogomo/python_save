@@ -1,0 +1,30 @@
+
+
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+print(thisdict)
+
+# Left strs are key
+
+# so
+
+print(thisdict["brand"]) # => "Ford"
+
+# Can also define dictionary like this
+# thisdict = dict(name = "John", age = 36, country = "Norway")
+thisdict = dict(brand = "Ford",model = "Mustang", year = 1964)
+
+# Adds to dictionary
+thisdict["color"] = "red"
+print(thisdict) # => thisdict + "color" = "red"
+
+# Used to change lock key values
+# If key doesn't exist, a new one is created
+thisdict.update({"color": "purple"}) 
+thisdict.update({"dog": "are cool"})
+print(thisdict)
+
+
