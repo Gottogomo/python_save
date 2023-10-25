@@ -1,0 +1,48 @@
+
+
+import string
+
+def file_stuff (input_file, name_output):
+    infile = open(input_file,"r")
+    text = infile.readlines()
+    infile.close()
+    
+    print (text)
+    
+    new_poem = []
+    for line in text:
+        line.strip()
+        
+        new_line = ""
+        for letter in line:
+            if (letter not in string.punctuation):
+                new_line += str(letter)
+        
+        new_poem.append(new_line.strip())
+    
+    words_poem = []
+    for line in new_poem:
+        words_poem.append(line.split(" "))
+            
+    outfile = open(name_output,"w")
+    for line in words_poem:
+        for word in line:
+            outfile.write(word)
+            outfile.write("\n")
+    outfile.close()
+            
+
+#file_stuff('day23_poem.txt','day23_words.txt')
+
+
+# I
+# never
+# saw
+# a
+# purple
+# cow
+# I
+# never
+# hope
+# to
+# 
