@@ -1,0 +1,578 @@
+
+
+# .append function returns "None"
+
+alist = []
+
+# prints "None"
+print (alist.append("Hello"))
+
+# inserts at index
+alist.insert(1,"bye")
+# index >= length puts at end
+# negative indexes put it at len - 1, not len
+
+
+# Removes position of list
+del alist[0]
+# del is an operation
+# runtime error if index outside of range
+# del list[-1] does delete last term
+
+# Removes value from list (first occurence)
+alist.remove("bye")
+# not in causes runtime error
+
+try:
+    alist.remove("ailuhwfuillslfhseu")
+    
+except:
+    alist.append("Four score and 24")
+    
+    
+# Puts in alphabetical order, * > 1 > A > a
+alist.insert(0,"four score and 24")
+alist.sort()
+# if type != str in list, error
+
+
+# sorted in function that returns sorted list (good if need both sorted and unsorted list)
+another_list = []
+another_list = sorted(alist)
+
+
+# alist = alist[::-1]
+alist.reverse()
+
+# DOO range (int)[::-1] NOT range (int[::-1])
+
+print (alist)
+
+# Now interacting with blist interacts with both
+blist = alist
+
+blist.append("asdksajdad")
+print(blist)
+print(alist)
+
+# to make a copy, must clone
+# Cloning is done by slicing
+
+clist = alist[:]
+clist.append("adbjabsdjhadj")
+print(clist)
+print(alist)
+
+# ---------------------------------------------------------------------
+# TUPLES!
+# compound structure, holds multiple data types, and cannot be changed
+# str + list
+# can be indexed and sliced
+
+tup1 = ("a",23)
+# print (tup1[0])
+
+tup1 = tup1[0:1] + (35,) + tup1[2:]
+print (tup1)
+
+# empty tuple, can't (,)
+tup_a = ()
+
+# full tuple 
+tup_b = (1,2,"awdawd",[45],213,222,3)
+
+# one tuple
+tup_c = (9,)
+
+# len(), .count() [how many in tuple], .index(str1) [index of first str1] (all work on lists)
+
+
+# Used alot in lists
+tup_use = [(1,4),(2,3),(4,4)]
+
+# REALIZE!!!
+# (1,2) + (3,4) => (1,2,3,4) != (4,6)
+
+# Must rebuild tuples from scrath (like str's)
+
+atup = ()
+for i in range(5):
+    atup += (i,)
+print (atup)
+
+atup = atup[0:4] + (atup[4] - 7,)
+print (atup)
+
+# Also parenthesis aren't req. : atup = (1,2)  ==  atup = 1,2
+
+
+# Errors if range of list/tuple > len list/tuple
+
+
+# Also can unpack !!!!!!!  (allows returning multiple things)
+
+num1,num2,num3,num4,num5 = atup
+print (num1)
+print (num4)
+
+
+# Enumerate uses tuples to get info
+for tup in enumerate("Hello") :
+    print (tup)
+    
+    
+# Enumerate returns tuples containing (index,str[index])
+
+list_letters = []
+list_index = []
+
+for index,letter in enumerate("Good Bye"):
+    
+    list_letters.append(letter)
+    list_index.append(index)
+    
+    print (index)
+    print (letter)
+    
+print (list_letters)
+print (list_index)
+
+# notes
+# - if x,y,z = enumerate(str) -> runtime error (too many assignment)
+# - print (enumerate(str) ) -> position in memory, not tuple
+
+
+
+# Modules = import stuff
+import math
+
+# Functions (returns double)
+print (math.sqrt(4))
+print (math.gamma(5))
+# Constant
+print (math.pi)
+
+# can access using "m" instead of "math" (for ones with long names)
+import math as m
+print (m.sqrt(4))
+
+# imports functions "as defined functions". NOT RECCOMENDED (hard to read, "where is sqrt defined?")
+from math import * 
+print(sqrt(4))
+
+# String module
+# - gives you useful str constants (punctuation is best, other )
+# - string.punctuation (all punctuation), .ascii_letters, .ascii_uppercase, .ascii_lowercase, .digits
+
+import string
+print (string.punctuation)
+if "+" in string.punctuation:
+    print ("less work")
+    
+# Random module
+# - random.randrange(1,10), random.random() (float between 0 and 1 (exclusive))
+import random
+die_roll = random.randint(1,7)
+# Also
+die_rolls = random.randrange(0,6,2)
+yup = random.random()
+
+list_test = ["Hello","Goodbye"]
+print (list_test[int(random.random())]) # prints 1st element (index 0)
+
+
+
+# SCOPE = where a veriable (or other identifier) is recognized
+
+var2 = "I work"
+def wadawwdw(count):
+    var1 = count
+    list1 = ["hey"]
+    var2 = "I don't work"
+
+# var1 and list1 are defined outside of function, so can't be called in function
+# var2 callled outside of funtion is different then var2 called inside function
+# - global value is used if local variable isn't defined (so print(var2) in function without var2 => "I work")
+
+
+# Creating your own module
+# literally just import .py
+import module_test
+print (module_test.plus(2,4))
+
+# Can do for input verification
+
+
+
+# DICTIONARIES!!!
+
+dict_example = {"Hello" : "Good", "Goodbye" : 23, "Ok" : [2,3], "Not_ok" : (2,3)}
+
+print (dict_example["Hello"])
+
+# repeating keys overlap, so {"Hello" : 1 , "Hello" : 2} is actually {"Hello" : 2}
+
+dict_loop = {}
+dict_loop["Cat"] = "Cute"
+dict_loop["Dog"] = "Cuter"
+
+
+# if statements only checks if a certain key is in the dictionary
+
+# ALSO UNORDERED (cannot be indexed, print is just being nice)
+
+
+# Keys can be: int, float, tuple**, bool, str, and Nonetype (no lists or dictionaries for key)
+
+
+# Can change key match values
+dict_loop["Cat"] = "not cute"
+
+print (dict_loop)
+
+
+# Can create dictionary of two lists
+names = ["Micheal","B","Jordan"]
+ages = [13,24,99]
+name_age = {}
+
+for index,name in enumerate(names):
+    
+    name_age[name] = ages[index]
+    
+print (name_age)
+
+# Can create dictionary to match str parts to index
+# CAN DO THIS to MAKE A PDF LOOKUP, WHERE TEXT FILE IS ANOTHER py FILE
+str1 = "Hello"
+index_name = {}
+
+for index,letter in enumerate(str1):
+    index_name[index] = letter
+print(index_name)    
+
+
+
+# .keys()   .values()    .items()
+# shows you all keys, values, and key value pairs
+#   - ruins point of dictionaries tho
+
+
+# assingning an object (dict, tuple, list, str), to a var assigns a reference to that memory location
+#  - it does not make a copy, need to var1 = list[:], or var2 = dict[:]
+#       - only shallow copy, which means objects in the copied object change with the original ojbect
+
+alist = [4,5,3,3,[5,6]]
+blist = alist[:]
+alist[4].append(4)
+print (blist)
+# Copies memory location, not cloning object
+
+
+# REMEMBER len("Hello") == 5
+
+
+
+# TRY EXCEPT
+
+# Can do specific except errors
+num1 = 10**10000
+num2 = 1
+
+try:
+    num1/num2
+except ZeroDivisionError:
+    print ("0 division")
+except:
+    print ("Too big")
+
+# bottom always runs
+finally:
+    pass
+
+
+
+# OPENING AND USING FILES
+
+# must be in pwd
+infile = open("day20limerick.txt","r") # open the file for reading
+# definition is used to call the file, it isn't file
+
+# Three ways to read from file
+#   - Read all the text in really long string
+mytext = infile.read()
+infile.close() # always close files
+# print (mytext) file as string
+    
+#   - Read only line, up to and including \n
+infile = open("day20limerick.txt","r")
+myline = infile.readline()
+myline2 = infile.readline() # saves second line
+infile.close()
+print (myline)
+
+#   - read all lines into list of strings, most useful (includes \n)
+infile = open("day20limerick.txt","r")
+line_list = infile.readlines() 
+infile.close()
+print (line_list)
+
+
+# Every time you open and close a file, the initial position is reset 
+#   - line1, close, line1 vs line1, line2
+
+# REMEMBER \n has len = 1, not len = 2 !!!
+
+
+# If file doesn't exist, "FileNotFoundError" error occurs
+
+
+# Simple summation of numbers in a file of just numbers and whitespace
+infile = open("day21numbers.txt","r") # io.TextIOWrapper data type - knows file, directory, how open, and cursor
+text = infile.read()
+pieces = text.split() # Splits on all white space, INCLUDING \n
+total = 0
+for numb in pieces :
+    total += int(numb)
+print (total)
+infile.close()
+
+import os
+
+# Writing to files!
+#   - python creates file if doesn't exist, and will replace contents if does exist
+#   - Doesn't work if not closed... ALWAYS CLOSE DUMMY
+
+outfile = open("mynewfile.txt","w")
+
+outfile.write("Heya aodiwiojdoijiojoiqwoidqiojdoiwqd\n")
+outfile.write("Ok byyyyeyyeyeyyeyeyeyeyeye")
+
+outfile.close()
+
+# deletes file
+# hastag out to see file produced
+os.remove("mynewfile.txt")
+
+# Only write, no writeline or writelines
+
+import string
+
+outfile = open("letter.txt","w")
+outfile.write(string.ascii_lowercase)
+outfile.close()
+
+os.remove("letter.txt")
+
+# appends everytime it's run
+# ** if a file deosn't exist, it will be created
+
+# apendfile = open("day22alice.txt","a")
+# apendfile.write("\nThe END!!")
+# apendfile.close()
+
+# no remove funcionality, so .appends are permenant
+
+
+# ----------------------------------------
+# CSV stuffs!
+#   - comma (or tabs or semicolons) seperated values
+
+# real coder stuff, intermediate
+
+infile = open("day22crime.csv","r")
+headers = infile.readline() # headers
+data = infile.readlines() # data, remember lists of lines with \n
+infile.close()
+
+crime_tot = 0
+for line in data :
+    line.strip()
+    date,crime,city_name,crime_rate = line.split(",")
+    crime_tot += float(crime_rate)
+
+print (crime_tot/len(data))
+
+# crime ratinf of only starting with s
+
+crime_tot_s = 0
+s_count = 0
+for line in data :
+    line.strip()
+    date,crime,city_name,crime_rate = line.split(",")
+    if city_name[0].lower() == "s" :
+        crime_tot_s += float(crime_rate)
+        s_count += 1
+
+print (crime_tot_s/s_count)
+
+
+
+# dict comparing name to crime rating
+infile = open("day22crime.csv","r")
+headers = infile.readline() # headers
+data = infile.readlines() # data, remember lists of lines with \n
+infile.close()
+
+dict_crime = {}
+for line in data :
+    line.strip()
+    data_line = line.split(",")
+    dict_crime[data_line[2]] = data_line[3].strip()
+
+print (dict_crime)
+
+
+# What percentage of Sacremento crime is bike related?
+#   - file is annoying though (spelled bicycle)
+
+infile = open("day23police.csv","r")
+headers = infile.readline()
+datalines = infile.readlines()
+infile.close()
+
+count = 0
+for line in datalines:
+    data_part = (line.strip()).split(",")
+    if ("bicycle" in data_part[2].lower()) or ("bike" in data_part[2].lower()) :
+        count += 1
+        
+print (count*100/len(datalines))
+
+# What district has the most of some crime?
+
+# DON'T RUN (OMEGA O 100000000000)
+
+# infile = open("day23police.csv","r")
+# headers = infile.readline()
+# datalines = infile.readlines()
+# infile.close()
+
+
+# dict_districts = {}
+# for line in datalines:
+#     data_part = (line.strip()).split(",")
+#     district = data_part[1]
+#     crime = data_part[3]
+#     if district not in dict_districts :
+#         dict_districts[district] = [ [crime,1] ]
+#     else:
+#         for pair in dict_districts[district]:
+#             if crime == pair[0]:
+#                 pair[1] += 1
+#             else:
+#                 dict_districts[district].append([crime,1])
+    
+# Always try to
+
+# try:
+#       infile = open(file,"r")
+#       infile.close()
+# except FileNotFoundError:
+#       print ("no file")
+# except:
+#       print ("other error")
+    
+
+#--------------------------
+# API's (application programming interface)
+#   - can get data from the web
+
+
+# data on the web is called a web API (Application Programming Interface)
+# web APIs provide data to other computers (not html which is for people)
+# import requests
+#url = "https://pokeapi.co/api/v2/pokemon/3"
+# r = requests.get(url) # send a get request to this url - r stands for response
+#print(r) # prints out the status
+#print(r.text[:500]) # r.text is a str
+#print(type(r.text))
+# convert this str into a dictionary or list or other python data structure
+#data = r.json() # the .json function converts your str into the correct data structure
+# json is a notation for storing data on the web
+#print(type(data))
+#print(data.keys())
+#print(data["name"])
+#print(data['height'])
+#print(data['weight'])
+
+
+# data stored at website can be diffferent kinds of storage (dict, list, etc)
+
+# import part of data to see how it's stored, or look at documentation
+baseurl = "https://pokeapi.co/api/v2/" # url of data
+parturl = "pokemon/charmander" # added part to data
+
+# requests data   r = requests.get(baseurl + parturl)
+# print (r) #---> prints <response [200]> , therfore it worked
+#   - RESPONSE DATA TYPE: can be used to get data
+
+#   print (r.text[0:500]) # text data is in a string, do first 500 cause ALOT
+
+# data = r.json() # convert string to appropriate data type (usually dict, sometimes list of dicts)
+
+# since we know it's a dictionary, print(data.keys() ) --> one of the keys is weight
+# print (data[weight]) # weight of charmader
+
+
+parturl = "pokemon,charizard"
+# r = requests.get(baseurl + parturl) 
+# data = r.json()
+# print (data[weight]) # weight of charizard
+
+
+
+
+# If website works, but html not json?
+
+# r = requests.get("http://www.gatch.edu")
+# print (type(r)) --> response
+# print (r)
+
+# data = r.json() # ERROR: JSON DECODE ERROR
+#   - because in html format, HARD TO RECOVER
+
+
+# NO ZERO VALUES, START WITH 1 (standered)
+
+baseurl = "https://swapi.dev/api/"
+parturl = "/people/1" # who is Star Wars character person 1
+# r = requests.get(baseurl + parturl)
+# print (r)
+# data = r.json() # formated data to make list or dict
+# print (type(data)) --> dict
+
+# print (data.keys()) --> sees name is key
+# print (data["name"])
+# name = data["name"]
+
+# print (data["homeworld"]) --> gives url
+# newurl = data["homeworld"]
+# r2 = requests.get(newurl)
+# print (r2) --> since <response[200]>, cont
+# data2 = r2.json()
+# print (type(data2)) --> since dict, continue
+# print (data2.keys())
+# print (data2["name"])
+# name_planet = data2["name"]
+
+
+# Create a dictionary that maps each Star Wars character to their homeworld (first 5 as test)
+
+# star_dict = {}
+# for i in range (1,6):
+#     baseurl = "https://swapi.dev/api/"
+#     parturl = "/people/" + str(i)
+    
+#     r = requests.get(baseurl + parturl)
+#     data = r.json() 
+#     name = data["name"]
+    
+#     newurl = data["homeworld"]
+#     r2 = requests.get(newurl)
+#     data2 = r2.json()
+#     homeworld = data2["name"]
+    
+#     star_dict[name] = homeworld
+    
+    
