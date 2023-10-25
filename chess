@@ -1,0 +1,308 @@
+
+
+class Board :
+    
+    def __init__ (self,name,position):
+        self.name = name
+        self.position = position
+    
+    
+def Position_maker (column,row):
+    
+    return "_" + str(column) + str(row)
+
+def dict_test ():
+    
+    for i in range (num_column_board):
+    
+        for n in range (num_row_board):
+            
+            print (dict_board[Position_maker(chr(65 + n),i + 1)].position)
+            print (dict_board[Position_maker(chr(65 + n),i + 1)].name)
+            
+def Print_Board(player_color):
+    
+    #if player_color == "white" :
+    
+        for i in reversed(range(num_column_board)):
+            
+            row_board = "" 
+            
+            for n in range(num_row_board):
+                
+                row_board += dict_board[Position_maker(chr(65 + n),i + 1)].name[0] + " "
+                
+            print (row_board)
+    
+    # else:
+        
+    #     for i in range(num_column_board):
+            
+    #         row_board = "" 
+            
+    #         for n in range(num_row_board):
+                
+    #             row_board += dict_board[Position_maker(chr(65 + n),i + 1)].name[0] + " "
+                
+    #         print (row_board)
+        
+def input_move (turn_numb,player_color_recurs):
+    
+    while (True):
+    
+        error_message = ""
+        user_input = input ("Input move: ")
+        user_input_moves = user_input.split(" to ")
+        
+        if " to " not in user_input :
+            
+            error_message = "Please format your input correctly _to"
+            
+        if len (user_input.split(" to ")) != 2 :
+           
+            error_message = "Please format your input correctly _is"
+            
+        for i in range (len(user_input_moves)):
+            
+            if "_" + user_input_moves[i] not in dict_board :
+                error_message = "Please input a movement to a valid position"
+                
+        if error_message != "" :
+            
+            print (error_message)
+            
+        else:
+            return (user_input)
+        
+def piece_move(user_input_recurs,player_color,turn):
+    
+    user_input_moves = user_input_recurs.split(" to ")
+    piece_choice = dict_board["_" + user_input_moves[0]].name
+    
+    column_inital = ord(user_input_moves[0][0]) - 65
+    column_final = ord(user_input_moves[1][0]) - 65
+    
+    row_inital = int(user_input_moves[0][1])
+    row_final = int(user_input_moves[1][1])
+    
+
+    
+    if piece_choice[0] == "O" :
+        
+        print("Please choose a unit of team" + player_color)
+        input_move(turn,player_color)
+
+    elif player_color[0] != piece_choice[1]:
+        
+        print ("You chose a piece of the incorrect color, please choose a " + player_color + " piece")
+        input_move(turn,player_color)
+        
+    elif user_input_moves[0] == user_input_moves[1] :
+        
+        print ("Please move your piece somewhere not on itself")
+        input_move(turn,player_color)
+    
+    elif piece_choice[0] == "R" :
+        
+        for i in range (num_row_board) :
+            if (i == row_final) and (column_inital == column_final) : 
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+        for i in range (num_column_board) :
+            if (i == column_final) and (row_inital == row_final) : 
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+        
+    elif piece_choice[0] == "k" :
+        
+        if ((row_inital + 2 == row_final) or (row_inital - 2 == row_final)) and ((column_inital + 1 == column_final) or (column_inital - 1 == column_final)) :
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+        
+        elif ((column_inital + 2 == column_final) or (column_inital - 2 == column_final)) and ((row_inital + 1 == row_final) or (row_inital - 1 == row_final)) :
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+        
+        
+    elif piece_choice[0] == "B" :
+        
+        for i in range (num_row_board):
+            
+           if (row_inital == row_final + i) and ((column_final + i == column_inital) or (column_final - i == column_inital)):
+               
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+        for i in range (num_column_board):
+            
+            if (row_inital == row_final - i) and ((column_final + i == column_inital) or (column_final - i == column_inital)):
+               
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+            
+    elif piece_choice[0] == "Q" :
+        
+        for i in range (num_row_board):
+            
+            if (row_inital == row_final + i) and ((column_final + i == column_inital) or (column_final - i == column_inital)):
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+            elif (i == row_final) and (column_inital == column_final) : 
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+        for i in range (num_column_board):
+            
+            if (row_inital == row_final - i) and ((column_final + i == column_inital) or (column_final - i == column_inital)):
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+                
+            elif (i == column_final) and (row_inital == row_final) : 
+                dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+                dict_board["_" + user_input_moves[0]].name = "O"
+        
+       
+        
+    elif piece_choice[0] == "K" :
+    
+        if (row_inital == row_final + 1) and ((column_final + 1 == column_inital) or (column_final - 1 == column_inital)):
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+            
+        elif ((row_inital + 1 == row_final) or (row_inital - 1 == row_final))and (column_inital == column_final) : 
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+                
+        elif (row_inital == row_final - 1) and ((column_final + 1 == column_inital) or (column_final - 1 == column_inital)):
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+            
+        elif ((column_inital + 1 == column_final) or (column_inital - 1 == column_final)) and (row_inital == row_final) : 
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+        
+        
+    elif piece_choice[0] == "P" :
+        
+        if row_inital + 1 == row_final :
+            
+            dict_board["_" + user_input_moves[1]].name = dict_board["_" + user_input_moves[0]].name
+            dict_board["_" + user_input_moves[0]].name = "O"
+
+    else:
+        
+        return False
+    
+    
+    
+        
+    
+        
+       
+    
+        
+
+
+        
+        
+
+
+dict_board = {}
+
+
+num_column_board = 8
+num_row_board = 8
+
+
+for i in range (num_column_board):
+    
+    for n in range (num_row_board):
+        
+        dict_board.update({Position_maker(chr(i+65),n+1) : Board("O", Position_maker(chr(i+65),n+1))}) 
+      
+    # Now have (position => name,position) in dict
+    
+# dict_test()
+    
+for i in range (num_column_board):
+    
+    if (i == 0 or i == num_column_board - 1) : 
+        
+        dict_board[Position_maker(chr(65 + i),1)].name = "Rb Rook"
+        
+    elif (i == 1) or (i == num_column_board - 2) :
+        
+        dict_board[Position_maker(chr(65 + i),1)].name = "kb Knight"
+        
+    elif (i == 2) or (i == num_column_board - 3) :
+        
+        dict_board[Position_maker(chr(65 + i),1)].name = "Bb Bishop"
+        
+    elif (i == 3) :
+        
+        dict_board[Position_maker(chr(65 + i),1)].name = "Qb Queen"
+        
+    elif (i == 4) :
+        
+        dict_board[Position_maker(chr(65 + i),1)].name = "Kb King"
+        
+for i in range (num_column_board):
+    
+    dict_board[Position_maker(chr(65 + i),2)].name = "Pb Pawn"
+    
+    
+for i in range (num_column_board):
+    
+    if (i == 0 or i == num_column_board - 1) : 
+        
+        dict_board[Position_maker(chr(65 + i),8)].name = "Rw Rook"
+        
+    elif (i == 1) or (i == num_column_board - 2) :
+        
+        dict_board[Position_maker(chr(65 + i),8)].name = "kw Knight"
+        
+    elif (i == 2) or (i == num_column_board - 3) :
+        
+        dict_board[Position_maker(chr(65 + i),8)].name = "Bw Bishop"
+        
+    elif (i == 3) :
+        
+        dict_board[Position_maker(chr(65 + i),8)].name = "Qw Queen"
+        
+    elif (i == 4) :
+        
+        dict_board[Position_maker(chr(65 + i),8)].name = "Kw King"
+        
+for i in range (num_column_board):
+    
+    dict_board[Position_maker(chr(65 + i),7)].name = "Pw Pawn"
+        
+        
+# dict_test()
+        
+
+Print_Board("white")
+    
+game_play = True
+turn = 0
+while (game_play):
+    
+    player_color = "black"
+    
+    # if turn%2 == 1 :
+    #     player_color = "white"
+    # else:
+    #     player_color = "black"
+        
+    piece_move(input_move(turn,player_color),player_color,turn)
+    
+    print ("")
+    Print_Board(player_color)
+    print("")
+        
+    turn += 1
+    
+    
